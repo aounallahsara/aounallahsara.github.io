@@ -296,7 +296,7 @@
                 font-size: 1.8rem;
             }
         }
-        /* Soft Skills Tags */
+        
 .soft-skills-tags {
     display: flex;
     flex-wrap: wrap;
@@ -320,6 +320,49 @@
     background-color: #bbdefb;
     transform: translateY(-2px);
 }
+        /* Update soft skill cards layout */
+.soft-skill-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+}
+
+
+.soft-skill-icon {
+    min-width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+
+.soft-skill-title {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+
+@media (max-width: 480px) {
+    .soft-skill-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .soft-skill-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -333,13 +376,12 @@ I build Flutter apps and explore AI through hands-on projects and continuous lea
         </p>
     </header>
       <!-- Skills Section -->
-   
+   <h2 class="section-title">My Soft Skills</h2>
 <div class="soft-skill-card">
     <div class="soft-skill-icon">
         <i class="fas fa-brain"></i> 
     </div>
     <h3 class="soft-skill-title">Fast Learner</h3>
-    ...
 </div>
 
 
@@ -348,7 +390,6 @@ I build Flutter apps and explore AI through hands-on projects and continuous lea
         <i class="fas fa-seedling"></i> 
     </div>
     <h3 class="soft-skill-title">Growth Mindset</h3>
-    ...
 </div>
 
 
@@ -357,7 +398,6 @@ I build Flutter apps and explore AI through hands-on projects and continuous lea
         <i class="fas fa-puzzle-piece"></i> 
     </div>
     <h3 class="soft-skill-title">Problem-Focused</h3>
-    ...
 </div>
 
 
@@ -366,7 +406,7 @@ I build Flutter apps and explore AI through hands-on projects and continuous lea
         <i class="fas fa-rocket"></i> 
     </div>
     <h3 class="soft-skill-title">Independent & Responsible</h3>
-    ...
+    
 </div>
 
 
@@ -375,7 +415,6 @@ I build Flutter apps and explore AI through hands-on projects and continuous lea
         <i class="fas fa-graduation-cap"></i> 
     </div>
     <h3 class="soft-skill-title">Autonomous Learner</h3>
-    ...
 </div>
 
 <div class="soft-skill-card">
@@ -383,7 +422,6 @@ I build Flutter apps and explore AI through hands-on projects and continuous lea
         <i class="fas fa-trophy"></i> 
     </div>
     <h3 class="soft-skill-title">Collaborative Spirit</h3>
-    ...
 </div>
     <!-- Projects Section -->
     <section class="projects-section">
