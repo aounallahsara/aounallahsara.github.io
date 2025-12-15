@@ -320,7 +320,12 @@
     background-color: #bbdefb;
     transform: translateY(-2px);
 }
-        /* Update soft skill cards layout */
+        .soft-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 skills per line */
+    gap: 20px;
+    margin-top: 30px;
+}
 .soft-skill-card {
     display: flex;
     align-items: center;
@@ -361,6 +366,17 @@
         width: 60px;
         height: 60px;
         font-size: 1.5rem;
+    }
+}
+        @media (max-width: 992px) {
+    .soft-skills-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 576px) {
+    .soft-skills-grid {
+        grid-template-columns: 1fr; 
     }
 }
     </style>
