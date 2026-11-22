@@ -162,7 +162,7 @@ footer{text-align:center;color:var(--muted);padding:34px 0;font-size:.9rem}
 <nav><div class="wrap">
   <a class="logo" href="#top">Sara<span>.</span>dev</a>
   <div class="links">
-    <a href="#about">About</a><a href="#projects">Projects</a><a href="#research">Research</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
+    <a href="#about">About</a><a href="#projects">Projects</a><a href="research.html">Research</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
     <button class="icon-btn" id="theme" aria-label="Switch between light and dark theme"><i class="fas fa-moon"></i></button>
   </div>
 </div></nav>
@@ -256,7 +256,7 @@ footer{text-align:center;color:var(--muted);padding:34px 0;font-size:.9rem}
       <h3>BrainPrint: EEG identification</h3><div class="meta">Research prototype · with Chetti Chifaa</div>
       <p>A machine-learning prototype that identifies and verifies people from their brain signals.</p>
       <div class="tags"><span>EEG</span><span>Random Forest</span><span>Biometrics</span></div>
-      <div class="card-foot"><a class="gh" href="#research"><i class="fas fa-book-open"></i> Read the article</a></div>
+      <div class="card-foot"><a class="gh" href="research.html"><i class="fas fa-book-open"></i> Read the article</a></div>
     </article>
 
     <article class="card ai">
@@ -274,89 +274,16 @@ footer{text-align:center;color:var(--muted);padding:34px 0;font-size:.9rem}
   <h2 class="sec">Research</h2>
   <p class="sub">I'm interested in how machine learning can work with biological signals, and in the privacy questions that come with it.</p>
   <div class="interests"><span>EEG biometrics</span><span>Biometric authentication</span><span>Machine learning</span><span>Brain data privacy</span></div>
-
-  <article class="paper">
-    <header class="paper-head">
-      <h3>BrainPrint: can brain signals help identify a person?</h3>
-      <p class="byline">By Aounallah Meriem Sara and Chetti Chifaa · Workshop &amp; Seminar, Artificial Intelligence Engineering</p>
-      <span class="note">A research prototype, not a finished security system</span>
-    </header>
-    <div class="prose">
-      <p>Fingerprints, faces, irises and voices are all used to recognize people. Each has a weakness: they can be photographed, recorded or copied, and none of them can be changed after a leak. For this project we asked a different question: do brain signals contain enough information to tell people apart?</p>
-
-      <h4>The idea</h4>
-      <p>Electroencephalography (EEG) records tiny voltage differences on the scalp that come from the combined activity of many neurons. It does not read thoughts. People may show different patterns of activity, because their brains differ in structure, in the connections between neurons and in what they are doing mentally. We did not try to prove why the differences exist. We tested whether they are strong enough for a machine-learning model to use.</p>
-      <p>BrainPrint handles two tasks. <b>Identification</b> asks "who is this person?" among known people. <b>Verification</b> asks "is this really person X?", which needs a score for the claimed identity and a threshold.</p>
-
-      <h4>The data</h4>
-      <p>We used the public PhysioNet EEG dataset and selected a subset of participants.</p>
-      <div class="facts-row"><div><b>30</b><span>participants</span></div><div><b>64</b><span>EEG channels</span></div><div><b>160 Hz</b><span>sampling rate</span></div><div><b>8</b><span>recordings per person</span></div></div>
-
-      <h4>How BrainPrint works</h4>
-      <ol class="steps">
-        <li><b>Record.</b> 64 scalp electrodes sample the signal 160 times per second.</li>
-        <li><b>Filter.</b> We keep 1 to 40 Hz to reduce slow drift and high-frequency noise. This is not full artifact removal, so eye blinks can remain.</li>
-        <li><b>Split into windows.</b> Each recording is cut into 4-second windows of 640 samples per channel.</li>
-        <li><b>Extract features.</b> For each channel we compute 5 absolute band powers, 5 relative band powers, the mean and the standard deviation. That gives 64 × 12 = 768 features per window.</li>
-        <li><b>Classify.</b> A Random Forest combines many decision trees and learns the patterns linked to each person.</li>
-        <li><b>Decide.</b> The model names an identity, or compares its score for a claimed identity with a threshold.</li>
-      </ol>
-      <p>We trained on runs 1 to 6 and tested on runs 7 and 8. We never mixed windows from the same recording across training and testing, because that makes results look better than they are.</p>
-
-      <h4>Results: identification</h4>
-      <p>On unseen recordings, the model identified the right participant about 98% of the time, against 3.3% for random guessing among 30 people. Leaving one run out at a time gave a lower 89.4%, and results varied between runs.</p>
-    </div>
-    <div class="fig reveal"><div class="fig-title">Identification accuracy, 30 participants</div>
-      <div class="bar"><span>4-second window</span><div class="track"><div class="fill " style="--w:98.1%"></div></div><b>98.1%</b></div><div class="bar"><span>Whole recording</span><div class="track"><div class="fill " style="--w:98.3%"></div></div><b>98.3%</b></div><div class="bar"><span>Leave one run out</span><div class="track"><div class="fill " style="--w:89.4%"></div></div><b>89.4%</b></div><div class="bar"><span>Random guessing</span><div class="track"><div class="fill base" style="--w:3.3%"></div></div><b>3.3%</b></div>
-    </div>
-    <div class="prose">
-      <p>Accuracy also held up as the group grew: 100% with 2 people, 99.4% with 10 and 98.0% with 30, averaged over random groups.</p>
-
-      <h4>How many electrodes do we need?</h4>
-      <p>In a separate test on 10 participants, we used random subsets of electrodes. Select a size to see the accuracy.</p>
-    </div>
-    <div class="fig"><div class="elec" id="elec" role="group" aria-label="Number of electrodes"></div>
-      <div class="big" id="elecNum">95.3%</div><div class="fig-cap" id="elecCap"></div>
-      <div class="track"><div class="fill" id="elecBar" style="width:95.3%"></div></div>
-    </div>
-    <div class="prose">
-      <p>Eight random electrodes reached about 95%, so fewer sensors may be enough under controlled conditions. This was not a test of real low-cost headsets.</p>
-
-      <h4>Which features carry the identity?</h4>
-      <p>On the same 10 participants we removed groups of features. Using all features gave about 96%. Removing gamma and the temporal (ear) electrodes gave about 94%, and keeping only theta and alpha gave about 92%. No single group explains the result.</p>
-
-      <h4>Results: verification</h4>
-      <p>We enrolled 20 participants and treated 10 others as strangers, then averaged over 5 random splits. At a threshold of 0.30:</p>
-      <div class="facts-row"><div><b>≈2.5%</b><span>real users rejected (FRR)</span></div><div><b>≈1%</b><span>enrolled impostors accepted (FAR)</span></div><div><b>≈2.9%</b><span>unknown strangers accepted</span></div><div><b>≈2%</b><span>equal error rate</span></div></div>
-      <p>Unknown strangers were harder to reject than enrolled impostors. We also built a small demo where you upload an EEG file, choose a claimed identity and move the threshold to see the score and the decision.</p>
-
-      <h4>When brain activity changes</h4>
-      <p>This was the most important test. We trained on one kind of activity and tested on another.</p>
-    </div>
-    <div class="fig reveal"><div class="fig-title">State-shift test, 30 participants</div>
-      <div class="bar"><span>Train on tasks, test another task</span><div class="track"><div class="fill " style="--w:99.2%"></div></div><b>99.2%</b></div><div class="bar"><span>Train on tasks, test eyes open</span><div class="track"><div class="fill " style="--w:76.4%"></div></div><b>76.4%</b></div><div class="bar"><span>Train on rest, test tasks</span><div class="track"><div class="fill warn" style="--w:64.7%"></div></div><b>64.7%</b></div><div class="bar"><span>Train on tasks, test eyes closed</span><div class="track"><div class="fill warn" style="--w:44.7%"></div></div><b>44.7%</b></div><div class="bar"><span>Random guessing</span><div class="track"><div class="fill base" style="--w:3.3%"></div></div><b>3.3%</b></div>
-    </div>
-    <div class="prose">
-      <div class="callout">Recognizing the same person is not always easy. Accuracy drops sharply when mental state or recording conditions change.</div>
-
-      <h4>Limits</h4>
-      <p>All recordings for a participant come from one session, so unseen recordings are not independent sessions. Our results belong to this dataset and setup and do not prove long-term stability.</p>
-    </div>
-    <div class="two">
-      <div><h5>What we tested</h5><ul><li>30 participants</li><li>Different recordings and task conditions</li><li>Identification and verification</li><li>Five random enrolled and stranger splits</li><li>Attempts from unknown strangers</li></ul></div>
-      <div><h5>What we did not test</h5><ul><li>Fatigue and emotion as controlled tests</li><li>Different EEG devices</li><li>Spoofing or replay attacks</li><li>Advanced artifact removal</li></ul></div>
-    </div>
-    <div class="prose">
-      <h4>Why brain data needs protection</h4>
-      <p>Brain signals may reveal more than identity, and unlike a password they cannot simply be replaced after a leak. Because we have not tested spoofing, strong identification results alone do not prove security.</p>
-
-      <h4>What comes next</h4>
-      <ul><li>Test lower-cost EEG headsets.</li><li>Explore revocable mental passwords, where a mental task acts as a changeable key.</li><li>Compare Random Forest with deep learning, such as convolutional neural networks.</li><li>Reduce the number of electrodes.</li></ul>
-      <p><b>Conclusion.</b> EEG signals can help recognize people under controlled conditions. More tests are needed across different days, mental states and devices, and privacy and practical use remain open challenges.</p>
-      <p class="byline">Data source: PhysioNet EEG datasets, physionet.org</p>
-    </div>
-  </article>
+  <a class="card ai" href="research.html" style="text-decoration:none;color:inherit;max-width:640px">
+    <div class="ic"><i class="fas fa-brain"></i></div>
+    <h3>BrainPrint: can brain signals help identify a person?</h3>
+    <div class="meta">Research article · with Chetti Chifaa</div>
+    <p>We tested whether EEG signals can identify and verify people with machine learning, and what happens when mental state changes. Read the full write-up.</p>
+    <div class="tags"><span>EEG</span><span>Random Forest</span><span>Biometrics</span></div>
+    <div class="card-foot"><span class="gh" style="color:var(--violet)"><i class="fas fa-book-open"></i> Read the article</span></div>
+  </a>
 </div></section>
+
 
 <section id="skills"><div class="wrap">
   <h2 class="sec">Skills</h2>
@@ -436,14 +363,6 @@ Object.keys(skills).forEach(k=>{const b=document.createElement('button');b.class
 show('Programming');
 
 
-// electrode explorer
-const el=[[1,76.5],[4,88.3],[8,95.3],[64,99.0]],eb=document.getElementById('elec');
-el.forEach(([n,v])=>{const b=document.createElement('button');b.textContent=n+(n===1?' electrode':' electrodes');b.setAttribute('aria-pressed',n===8);
- b.onclick=()=>{eb.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
-  document.getElementById('elecNum').textContent=v+'%';document.getElementById('elecBar').style.width=v+'%';
-  document.getElementById('elecCap').textContent='10 participants · random electrode subsets · random guessing is 10%'};
- eb.appendChild(b)});
-document.getElementById('elecCap').textContent='10 participants · random electrode subsets · random guessing is 10%';
 
 // reveal + year
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
